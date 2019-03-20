@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+  roles:
+    - cyber-range-target
+  vars:
+    cves_to_test:
+    - CVE-2014-6271
+    - CVE-2014-3153
+  tasks:
+    - name: install httpd
+      yum:
+        name: httpd
+        state: latest
+    - name: install php
+      yum:
+        name: php
+        state: latest
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
+        enabled: true

@@ -9,16 +9,15 @@
     - CVE-2014-6271
     - CVE-2014-3153
   tasks:
-    - name: install httpd
+    - name: install required packages
       yum:
-        name: httpd
-        state: latest
-    - name: install php
-      yum:
-        name: php
+        name: httpd, php, python-selinux, nmap-ncat, gcc
         state: latest
     - name: start httpd
       service:
         name: httpd
         state: started
         enabled: true
+    - name: disable SELinux
+      selinux:
+        state: disabled

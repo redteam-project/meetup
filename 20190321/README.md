@@ -100,7 +100,7 @@ lem host assess --curation exploit-curation --kind stride --score 000009
 
 Note that there is currently a [bug](https://github.com/redteam-project/lem/issues/5) in lem that prevents the exploit that maps to CVE-2014-3153 from returning, but for purposes of this lab we know that it maps to EDBID 35370.
 
-16. Stage the exploit and pop root. **EDIT** - this doesn't appear to work in GCE, so use your imagination.
+16. Stage the exploit and pop root. **EDIT** - this doesn't appear to work in GCE, which is exactly why this project matters. See the relevant [exploit-curation enhancement bug](https://github.com/redteam-project/exploit-curation/issues/1) to track progress, and check back later for an updated lab.
 
 ```
 lem exploit copy --curation /tmp/exploit-curation --source exploit-database --id 35370 --destination /tmp/

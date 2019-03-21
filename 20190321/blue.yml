@@ -11,7 +11,7 @@
   tasks:
     - name: install required packages
       yum:
-        name: httpd, php, python-selinux, nmap-ncat, gcc
+        name: httpd, php, nmap-ncat, gcc
         state: latest
     - name: start httpd
       service:

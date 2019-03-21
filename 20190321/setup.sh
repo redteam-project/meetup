@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -x
 PROJECT=`gcloud config list --format 'value(core.project)' 2>/dev/null`
 ZONE='us-east4-a'
 for INSTANCE in blue-1 red-1; do

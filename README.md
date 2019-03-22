@@ -7,3 +7,4 @@ This repo contains the hands-on materials for the [Red Team Project Meetup](http
 * 21 March 2019 - Launch Meetup and Hack Night
   * [Meetup Page](https://www.meetup.com/redteamproject/events/259624820/)
   * [Lab Notes](20190321/README.md)
+  * [Slides](20190321/launch_meetup.pdf)

@@ -1,4 +1,4 @@
-# Red Tema Project Meetup
+# Red Team Project Meetup
 
 This repo contains the hands-on materials for the [Red Team Project Meetup](https://meetup.com/redteamproject).
 

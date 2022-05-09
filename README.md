@@ -1,5 +1,7 @@
 # Red Team Project Meetup
 
+**Note that as of May 2022 this project is no longer active.**
+
 This repo contains the hands-on materials for the [Red Team Project Meetup](https://meetup.com/redteamproject).
 
 ## Meetups
